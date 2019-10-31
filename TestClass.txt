@@ -1,0 +1,24 @@
+@isTest
+private class TestClass {
+ @testSetup
+ 	static void setup() 
+     {
+        List<Lead> new_list = new List<Lead>();
+        for (Integer i = 0; i<200; i++) {
+            Lead l = new Lead();
+			l.Firstname='test';
+            l.LastName ='test';
+            l.Company = 'testcompany';
+            l.Status = 'testStatus';
+            new_list.add(l);
+        }
+        insert new_list;
+     }
+    
+    static testmethod void test(){
+        Test.startTest();    
+        UpdateRecords ob = new UpdateRecords();
+        Id batchId = Database.executeBatch(ob);
+        Test.stopTest();   
+    }
+}
